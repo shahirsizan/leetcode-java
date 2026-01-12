@@ -12,20 +12,21 @@ public class TrappingRainWater {
 		int[] rightMaxArray = new int[givenArrayLength];
 		
 		// populate leftMaxArray
-		leftMaxArray[0] = givenHeightArray[0];
+		leftMaxArray[0] = 0;
 		for (int i = 1; i < givenArrayLength; i++) {
-			leftMaxArray[i] = Math.max(leftMaxArray[i - 1], givenHeightArray[i]);
+			leftMaxArray[i] = Math.max(leftMaxArray[i - 1], givenHeightArray[i - 1]);
 		}
 		
 		// populate rightMaxArray
-		rightMaxArray[givenArrayLength - 1] = givenHeightArray[givenArrayLength - 1];
+		rightMaxArray[givenArrayLength - 1] = 0;
 		for (int i = givenArrayLength - 2; i >= 0; i--) {
-			rightMaxArray[i] = Math.max(rightMaxArray[i + 1], givenHeightArray[i]);
+			rightMaxArray[i] = Math.max(rightMaxArray[i + 1], givenHeightArray[i + 1]);
 		}
 		
 		int totalTrappedWater = 0;
 		for (int i = 0; i < givenArrayLength; i++) {
-			int currentTrappedWater = (Math.min(leftMaxArray[i], rightMaxArray[i]) - givenHeightArray[i]);
+			int currentWater = (Math.min(leftMaxArray[i], rightMaxArray[i]) - givenHeightArray[i]);
+			int currentTrappedWater = (currentWater < 0) ? 0 : currentWater;
 			totalTrappedWater = totalTrappedWater + currentTrappedWater;
 		}
 		
