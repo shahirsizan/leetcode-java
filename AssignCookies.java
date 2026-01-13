@@ -4,7 +4,7 @@ public class AssignCookies {
 	
 	public int findContentChildren(int[] greedFactorList, int[] sizeList) {
 		int result = 0;
-		// sort both arrays because order doesn't matter
+		// sort both the arrays because order doesn't matter, we are not returning arrays as answer.
 		Arrays.sort(greedFactorList);
 		Arrays.sort(sizeList);
 		
