@@ -3,29 +3,32 @@ import java.util.Arrays;
 public class TrappingRainWater {
 	
 	public int trap(int[] givenHeightArray) {
-		if (givenHeightArray == null || givenHeightArray.length < 3) {
+		if (givenHeightArray.length < 3) {
 			return 0;
 		}
 		
 		int givenArrayLength = givenHeightArray.length;
-		int[] leftMaxArray = new int[givenArrayLength];
-		int[] rightMaxArray = new int[givenArrayLength];
+		int[] leftTallestArray = new int[givenArrayLength];
+		int[] rightTallestArray = new int[givenArrayLength];
 		
-		// populate leftMaxArray
-		leftMaxArray[0] = 0;
+		// populate leftTallestArray
+		// leftTallest for left most place is 0
+		leftTallestArray[0] = 0;
 		for (int i = 1; i < givenArrayLength; i++) {
-			leftMaxArray[i] = Math.max(leftMaxArray[i - 1], givenHeightArray[i - 1]);
+			leftTallestArray[i] = Math.max(leftTallestArray[i - 1], givenHeightArray[i - 1]);
 		}
 		
-		// populate rightMaxArray
-		rightMaxArray[givenArrayLength - 1] = 0;
+		// populate rightTallestArray
+		// rightTallest for right most place is 0
+		rightTallestArray[givenArrayLength - 1] = 0;
 		for (int i = givenArrayLength - 2; i >= 0; i--) {
-			rightMaxArray[i] = Math.max(rightMaxArray[i + 1], givenHeightArray[i + 1]);
+			rightTallestArray[i] = Math.max(rightTallestArray[i + 1], givenHeightArray[i + 1]);
 		}
 		
 		int totalTrappedWater = 0;
 		for (int i = 0; i < givenArrayLength; i++) {
-			int currentWater = (Math.min(leftMaxArray[i], rightMaxArray[i]) - givenHeightArray[i]);
+			int currentWater = (Math.min(leftTallestArray[i], rightTallestArray[i]) - givenHeightArray[i]);
+			// for places where left and right tallest are 0, it will render (-)ve `currentWater` value
 			int currentTrappedWater = (currentWater < 0) ? 0 : currentWater;
 			totalTrappedWater = totalTrappedWater + currentTrappedWater;
 		}
