@@ -5,9 +5,6 @@ public class SpiralMatrix {
 	
 	public List<Integer> spiralOrder(int[][] matrix) {
 		List<Integer> result = new ArrayList<>();
-		if (matrix == null) {
-			return result;
-		}
 		
 		int rows = matrix.length;
 		int cols = matrix[0].length;
@@ -20,15 +17,17 @@ public class SpiralMatrix {
 		
 		while (topMost <= bottomMost && leftMost <= rightMost) {
 			
-			// traverse `right` in the same `topMost` row
-			for (int j = leftMost; j <= rightMost; j++) {
-				result.add(matrix[topMost][j]);
+			// traverse `right` in the current `topMost` row
+			if (topMost <= bottomMost && leftMost <= rightMost) {
+				for (int j = leftMost; j <= rightMost; j++) {
+					result.add(matrix[topMost][j]);
+				}
+				// shrink topMost boundary
+				topMost++;
 			}
-			// shrink topMost boundary
-			topMost++;
 			
-			// traverse `down` in the same `rightMost` col
-			if (topMost <= bottomMost) {
+			// traverse `down` in the current `rightMost` col
+			if (topMost <= bottomMost && leftMost <= rightMost) {
 				for (int i = topMost; i <= bottomMost; i++) {
 					result.add(matrix[i][rightMost]);
 				}
@@ -36,7 +35,7 @@ public class SpiralMatrix {
 				rightMost--;
 			}
 			
-			// traverse `left` in the same `bottomMost` row
+			// traverse `left` in the current `bottomMost` row
 			if (topMost <= bottomMost && leftMost <= rightMost) {
 				for (int j = rightMost; j >= leftMost; j--) {
 					result.add(matrix[bottomMost][j]);
@@ -45,7 +44,7 @@ public class SpiralMatrix {
 				bottomMost--;
 			}
 			
-			// traverse `up` in the same `leftMost` col
+			// traverse `up` in the current `leftMost` col
 			if (topMost <= bottomMost && leftMost <= rightMost) {
 				for (int i = bottomMost; i >= topMost; i--) {
 					result.add(matrix[i][leftMost]);
@@ -53,6 +52,8 @@ public class SpiralMatrix {
 				// shrink leftMost boundary
 				leftMost++;
 			}
+			
+			// ☝️ re-iterate next loop starting from waaaaaaay above. Again from left-to-right 👆
 		}
 		
 		return result;
