@@ -9,7 +9,7 @@ public class JumpGameIIGreedy {
 		
 		// starting at `i = 0`, `i + arr[i]` is our first window
 		// from within the current window, find out how farthest we can jump.
-		// at the end of the current window, we have to jump. So increment `minJumps` and re-iterate the process.
+		// at the end of the current window, we have to jump anyways. So increment `minJumps` and re-iterate the process.
 		// as soon as we find out our `global_farthest >= last index`, the `minJumps` at that moment is the answer
 		for (int i = 0; i < nums.length - 1; i++) {
 			global_farthest_idx = Math.max(global_farthest_idx, i + nums[i]);
