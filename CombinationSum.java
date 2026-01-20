@@ -58,16 +58,16 @@ public class CombinationSum {
 	
 	// ✅ main() ✅
 	public static void main(String[] args) {
-		CombinationSum myObj = new CombinationSum();
+		CombinationSumII myObj = new CombinationSumII();
 		
 		int[] nums1 = {2, 3, 6, 7};
 		int target1 = 7;
 		System.out.println("Input: candidates = [2, 3, 6, 7], target = 7");
-		System.out.println("Output: " + myObj.combinationSum(nums1, target1));
+		System.out.println("Output: " + myObj.combinationSum2(nums1, target1));
 		
 		int[] nums2 = {2, 3, 5};
 		int target2 = 8;
 		System.out.println("\nInput: candidates = [2, 3, 5], target = 8");
-		System.out.println("Output: " + myObj.combinationSum(nums2, target2));
+		System.out.println("Output: " + myObj.combinationSum2(nums2, target2));
 	}
 }
