@@ -40,7 +40,7 @@ public class CombinationSumII {
 				continue;
 			}
 			
-			// Pruning: If `givenNums[i]` greater than the `remainder`,
+			// Prune: If `givenNums[i]` greater than the `remainder`,
 			// then all the subsequent numbers are also greater than the remainder.
 			// So no need to do recursive call farther. Go back to previous caller function.
 			if (givenNums[i] > remaining) {
