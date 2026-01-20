@@ -11,11 +11,11 @@ public class CombinationSum {
 		List<Integer> currentList = new ArrayList<>();
 		// sorting `givenNums` will help us to cut off extra tree traversal.
 		Arrays.sort(givenNums);
-		backtrack(givenNums, target, 0, currentList, resultList);
+		combinationSumHelper(givenNums, 0, target, currentList, resultList);
 		return resultList;
 	}
 	
-	private void backtrack(int[] givenNums, int remaining, int currentStartIndex, List<Integer> currentList, List<List<Integer>> resultList) {
+	private void combinationSumHelper(int[] givenNums, int startIndexOfCurrentRecursion, int remaining, List<Integer> currentList, List<List<Integer>> resultList) {
 		// Base case: `target` achieved. Add `currentList` to result. Then backtrack.
 		if (remaining == 0) {
 			resultList.add(new ArrayList<>(currentList));
@@ -30,7 +30,7 @@ public class CombinationSum {
 		// No base case, go on.
 		// example {2, 3, 5} ; k = 8
 		
-		int i = currentStartIndex;
+		int i = startIndexOfCurrentRecursion;
 		while (i < givenNums.length) {
 			// Pruning: If `givenNums[i]` greater than the `remainder`,
 			// then all the subsequent numbers are also greater than the remainder.
@@ -42,11 +42,12 @@ public class CombinationSum {
 			// Add current option
 			currentList.add(givenNums[i]);
 			
-			// Do recursive call: Note that we pass 'i' instead of `i + 1`
+			// Do recursive call: Note that we pass 'i'.
 			// because we can use the same element unlimited number of times.
 			// we sorted the given array, so the recursion tree will find the combination of the smallest elements through the left most branch of the tree.
-			// so once we get into the next `i`, we will not get back to a lesser `i` in a branch, lest it will lead to duplication (though unordered)
-			backtrack(givenNums, remaining - givenNums[i], i, currentList, resultList);
+			// so once we get into `givenNums[i+1]` , we will not go back to a lesser `givenNums[i]` in the next recursion for next iteration,
+			// lest it will lead to duplication (though unordered) like for `k = 5`, {2,3} and {3,2} are not allowed.
+			combinationSumHelper(givenNums, i, remaining - givenNums[i], currentList, resultList);
 			
 			// Discard current option
 			currentList.removeLast();
