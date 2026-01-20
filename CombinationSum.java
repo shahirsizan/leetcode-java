@@ -6,16 +6,16 @@ import java.util.List;
 
 public class CombinationSum {
 	
-	public List<List<Integer>> combinationSum(int[] candidatesList, int target) {
+	public List<List<Integer>> combinationSum(int[] givenNums, int target) {
 		List<List<Integer>> resultList = new ArrayList<>();
 		List<Integer> currentList = new ArrayList<>();
-		// sorting `candidatesList` will help us to cut off extra tree traversal.
-		Arrays.sort(candidatesList);
-		backtrack(candidatesList, target, 0, currentList, resultList);
+		// sorting `givenNums` will help us to cut off extra tree traversal.
+		Arrays.sort(givenNums);
+		backtrack(givenNums, target, 0, currentList, resultList);
 		return resultList;
 	}
 	
-	private void backtrack(int[] candidatesList, int remaining, int currentStartIndex, List<Integer> currentList, List<List<Integer>> resultList) {
+	private void backtrack(int[] givenNums, int remaining, int currentStartIndex, List<Integer> currentList, List<List<Integer>> resultList) {
 		// Base case: `target` achieved. Add `currentList` to result. Then backtrack.
 		if (remaining == 0) {
 			resultList.add(new ArrayList<>(currentList));
@@ -28,21 +28,30 @@ public class CombinationSum {
 		}
 		
 		// No base case, go on.
+		// example {2, 3, 5} ; k = 8
 		
-		for (int i = currentStartIndex; i < candidatesList.length; i++) {
-			// Pruning: If `current number` is greater than the remainder,
+		int i = currentStartIndex;
+		while (i < givenNums.length) {
+			// Pruning: If `givenNums[i]` greater than the `remainder`,
 			// then all the subsequent numbers are also greater than the remainder.
-			// So no need to do recursive call farther. Backtrack.
-			if (candidatesList[i] > remaining) {
+			// So no need to do recursive call farther. Go back to previous caller function.
+			if (givenNums[i] > remaining) {
 				break;
 			}
-			// Add the current option (number)
-			currentList.add(candidatesList[i]);
+			
+			// Add current option
+			currentList.add(givenNums[i]);
+			
 			// Do recursive call: Note that we pass 'i' instead of `i + 1`
 			// because we can use the same element unlimited number of times.
-			backtrack(candidatesList, remaining - candidatesList[i], i, currentList, resultList);
+			// we sorted the given array, so the recursion tree will find the combination of the smallest elements through the left most branch of the tree.
+			// so once we get into the next `i`, we will not get back to a lesser `i` in a branch, lest it will lead to duplication (though unordered)
+			backtrack(givenNums, remaining - givenNums[i], i, currentList, resultList);
+			
 			// Discard current option
 			currentList.removeLast();
+			
+			i++;
 		}
 	}
 	
