@@ -37,8 +37,7 @@ public class Permutations {
 			visitedBooleanList[i] = true;
 			backtrack(numsArray, currentList, visitedBooleanList, resultList);
 			
-			// got back from recursive call
-			// remove `numsArray[i]` from `currentList` and go for next iteration
+			// backtrack, remove `numsArray[i]` from `currentList` and go for next iteration
 			currentList.removeLast();
 			visitedBooleanList[i] = false;
 		}
@@ -46,17 +45,17 @@ public class Permutations {
 	
 	// ✅ main() ✅
 	public static void main(String[] args) {
-		Permutations myObj = new Permutations();
+		PermutationsII myObj = new PermutationsII();
 		
 		int[] nums1 = {1, 2, 3};
-		List<List<Integer>> result1 = myObj.permute(nums1);
+		List<List<Integer>> result1 = myObj.permuteUnique(nums1);
 		System.out.println("Input: [1, 2, 3]");
 		System.out.println("Output: " + result1);
 		
 		System.out.println("\n");
 		
 		int[] nums2 = {0, 1};
-		List<List<Integer>> result2 = myObj.permute(nums2);
+		List<List<Integer>> result2 = myObj.permuteUnique(nums2);
 		System.out.println("Input: [0, 1]");
 		System.out.println("Output: " + result2);
 	}
