@@ -34,7 +34,7 @@ public class CombinationSum {
 		while (i < givenNums.length) {
 			// Pruning: If `givenNums[i]` greater than the `remainder`,
 			// then all the subsequent numbers are also greater than the remainder.
-			// So no need to do recursive call farther. Go back to previous caller function.
+			// So no need to iterate or do recursion farther. Go back to previous stack frame.
 			if (givenNums[i] > remaining) {
 				break;
 			}
