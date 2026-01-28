@@ -13,13 +13,13 @@ public class UniquePathsDP {
 	}
 	
 	private int recursive(int[][] dp, int row, int col) {
-		// if index out of bound, there is no way to reach to that index from [0][0]
+		// check whether index out of bound
 		if (row == -1 || col == -1) {
 			return 0;
 		}
 		
-		// anywhere in the first row, only way from [0][0] is to traverse right
-		// anywhere in the first col, only way from [0][0] is to traverse downwards
+		// anywhere in row 0, only way to traverse is to the right. No way to come from above.
+		// anywhere in col 0, only way to traverse is down. No way to come from left.
 		if (row == 0 || col == 0) {
 			return 1;
 		}
@@ -29,10 +29,11 @@ public class UniquePathsDP {
 			return dp[row][col];
 		}
 		
-		// # of ways from [0][0] to this particular [row][col] is:
-		// # of ways from [0][0] to `immediate above cell + immediate left cell`
-		// this recursion will eventually send us up to the cell [0][0] which has a base case return of `1`.
-		dp[row][col] = recursive(dp, row - 1, col) + recursive(dp, row, col - 1);
+		// # of ways to reach this particular [row][col] is:
+		// # of ways from immediate above cell + # of ways from immediate left cell
+		// this recursion will eventually lead us up to starting point [0][0] which has a base case return of `1`.
+		int noOfWaysToReachHere = recursive(dp, row - 1, col) + recursive(dp, row, col - 1);
+		dp[row][col] = noOfWaysToReachHere;
 		return dp[row][col];
 	}
 	
