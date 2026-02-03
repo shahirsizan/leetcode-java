@@ -1,4 +1,4 @@
-// inspired from `RemoveElementsLL` problem
+// inspired from `RemoveElementsLL` problem of takeUforward
 
 package linkedList;
 
