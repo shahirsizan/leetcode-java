@@ -16,53 +16,37 @@ public class MergeTwoSortedLists {
 		}
 	}
 	
-	public ListNode mergeTwoLists(ListNode leftSortedHead, ListNode rightSortedHead) {
-		ListNode dummyHeadToBeReturned = new ListNode(0);
-		ListNode currentDummy = dummyHeadToBeReturned;
+	public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+		// list1: 1 -> 2 -> 4
+		// list2: 1 -> 3 -> 4
+		// `newDummyHead` value doesn't matter, we will return `newDummyHead.next`
+		ListNode newDummyHead = new ListNode(0);
+		ListNode currentDummy = newDummyHead;
 		
-		while (leftSortedHead != null && rightSortedHead != null) {
-			if (leftSortedHead.val <= rightSortedHead.val) {
-				currentDummy.next = leftSortedHead;
-				leftSortedHead = leftSortedHead.next;
+		// also, we are merging the lists, so changing the heads of the two lists is OK
+		while (list1 != null && list2 != null) {
+			if (list1.val <= list2.val) {
+				currentDummy.next = list1;
+				list1 = list1.next;
 			} else {
-				currentDummy.next = rightSortedHead;
-				rightSortedHead = rightSortedHead.next;
+				currentDummy.next = list2;
+				list2 = list2.next;
 			}
 			currentDummy = currentDummy.next;
 		}
 		
 		// append the remainder of the non-null list after `currentDummy`
-		if (leftSortedHead != null) {
-			currentDummy.next = leftSortedHead;
-		} else if (rightSortedHead != null) {
-			currentDummy.next = rightSortedHead;
+		if (list1 != null) {
+			currentDummy.next = list1;
+		} else if (list2 != null) {
+			currentDummy.next = list2;
 		}
 		
 		// return new head of the merged list
-		return dummyHeadToBeReturned.next;
+		return newDummyHead.next;
 	}
 	
-	// --- Main Method for Demonstration ---
-	public static void main(String[] args) {
-		MergeTwoSortedLists solver = new MergeTwoSortedLists();
-		
-		// List 1: 1 -> 2 -> 4
-		ListNode list1 = new ListNode(1, new ListNode(2, new ListNode(4)));
-		// List 2: 1 -> 3 -> 4
-		ListNode list2 = new ListNode(1, new ListNode(3, new ListNode(4)));
-		
-		System.out.print("List 1: ");
-		printList(list1);
-		System.out.print("List 2: ");
-		printList(list2);
-		
-		ListNode mergedHead = solver.mergeTwoLists(list1, list2);
-		
-		System.out.print("Merged List: ");
-		printList(mergedHead); // Expected: 1 -> 1 -> 2 -> 3 -> 4 -> 4
-	}
-	
-	// Helper function to print the list
+	// ✅ printList() ✅
 	private static void printList(ListNode head) {
 		ListNode current = head;
 		while (current != null) {
@@ -70,5 +54,20 @@ public class MergeTwoSortedLists {
 			current = current.next;
 		}
 		System.out.println();
+	}
+	
+	// ✅ main() ✅
+	public static void main(String[] args) {
+		MergeTwoSortedLists myObj = new MergeTwoSortedLists();
+		
+		// 1 -> 2 -> 4
+		ListNode list1 = new ListNode(1, new ListNode(2, new ListNode(4)));
+		// 1 -> 3 -> 4
+		ListNode list2 = new ListNode(1, new ListNode(3, new ListNode(4)));
+		
+		ListNode mergedHead = myObj.mergeTwoLists(list1, list2);
+		
+		System.out.println("Merged List (Expected: 1 -> 1 -> 2 -> 3 -> 4 -> 4): ");
+		printList(mergedHead);
 	}
 }
