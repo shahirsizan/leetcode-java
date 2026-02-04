@@ -1,4 +1,4 @@
-// https://leetcode.com/problems/merge-two-sorted-lists/
+package linkedList;// https://leetcode.com/problems/merge-two-sorted-lists/
 
 public class MergeTwoSortedLists {
 	
