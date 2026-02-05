@@ -1,3 +1,5 @@
+package tree;
+
 public class SameBinaryTree {
 	
 	static class TreeNode {
@@ -15,17 +17,24 @@ public class SameBinaryTree {
 	 * Worst Space Complexity: O(N); If skewed tree, then we'll need N recursion stacks
 	 */
 	public boolean isSameTree(TreeNode p, TreeNode q) {
-		// if both of them null, they're good to go
+		// if both of them null, return true
 		if (p == null && q == null) {
 			return true;
 		}
 		
-		// if only one of them null OR their values don't match, the tree `not equal`
-		if (p == null || q == null || p.val != q.val) {
+		// if only one of them null, return false
+		if (p == null || q == null) {
 			return false;
 		}
 		
-		// check left and right subtrees recursively
+		// if values don't match,
+		if (p.val != q.val) {
+			return false;
+		}
+		
+		// at this point, they are `non-null` AND values are `equal`
+		
+		// check left and right subtrees
 		boolean leftSame = isSameTree(p.left, q.left);
 		boolean rightSame = isSameTree(p.right, q.right);
 		
