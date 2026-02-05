@@ -5,17 +5,18 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-class TreeNode {
-	int val;
-	TreeNode left;
-	TreeNode right;
-	
-	TreeNode(int val) {
-		this.val = val;
-	}
-}
 
 public class BinaryTreeBFS {
+	static class TreeNode {
+		int val;
+		TreeNode left;
+		TreeNode right;
+		
+		TreeNode(int val) {
+			this.val = val;
+		}
+	}
+	
 	// Level Order Traversal using while + for
 	public List<List<Integer>> levelOrder(TreeNode root) {
 		List<List<Integer>> result = new ArrayList<>();
