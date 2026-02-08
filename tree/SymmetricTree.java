@@ -1,5 +1,7 @@
 // https://leetcode.com/problems/symmetric-tree/description/
 
+package tree;
+
 public class SymmetricTree {
 	
 	static class TreeNode {
