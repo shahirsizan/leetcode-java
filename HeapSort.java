@@ -1,4 +1,13 @@
 // done
+/**
+ * performance analysis
+ * time complexity (phase 1, build heap):
+ * O(nlogn) (since each of the `n` insertions can take at most `logn` swaps).
+ * time complexity (phase 2, fix heap after extracting head):
+ * O(nlogn) (each of the `n` head extractions takes `logn` to fix).
+ * Overall: O(NlogN).
+ * Space Complexity: O(1) (In-place).
+ */
 
 import java.util.Arrays;
 
