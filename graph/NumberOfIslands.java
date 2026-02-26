@@ -1,4 +1,5 @@
 // https://leetcode.com/problems/number-of-islands/description/
+package graph;
 
 public class NumberOfIslands {
 	public int numIslands(char[][] givenGrid) {
@@ -8,10 +9,12 @@ public class NumberOfIslands {
 		
 		for (int currRow = 0; currRow < rows; currRow++) {
 			for (int currCol = 0; currCol < cols; currCol++) {
-				// we start traversing the matrix. Upon finding the first `1`,
-				// we preform DFS and convert all adjacent (U,D,L,R) cells to `0`.
+				// We start traversing the matrix. Upon finding the first `1`,
+				// we perform DFS and convert all adjacent (U,D,L,R) cells to `0`.
 				// After returning from all the recursion frames, we have successfully finished processing a single island.
-				// Now continue traversing next cells for another `1` and do the same thing again.
+				// Now continue traversing next cells for another `1` which represents another separate island
+				// because the previous islands `1`s are all made `0`s.
+				// Do the same thing again.
 				if (givenGrid[currRow][currCol] == '1') {
 					recurseFunc(givenGrid, currRow, currCol);
 					count++;
