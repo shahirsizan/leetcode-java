@@ -1,3 +1,5 @@
+package matrix;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -73,22 +75,14 @@ public class SpiralMatrix {
 	public static void main(String[] args) {
 		SpiralMatrix ourObj = new SpiralMatrix();
 		
-		int[][] matrix1 = {
+		int[][] matrix = {
 				{1, 2, 3},
 				{4, 5, 6},
 				{7, 8, 9}
 		};
-		System.out.println("Matrix 1 Input:");
-		printMatrix(matrix1);
-		System.out.println("Matrix 1 Output: " + ourObj.spiralOrder(matrix1));
 		
-		int[][] matrix2 = {
-				{1, 2, 3, 4},
-				{5, 6, 7, 8},
-				{9, 10, 11, 12}
-		};
-		System.out.println("\nMatrix 2 Input:");
-		printMatrix(matrix2);
-		System.out.println("Matrix 2 Output: " + ourObj.spiralOrder(matrix2));
+		System.out.println("Input:");
+		printMatrix(matrix);
+		System.out.println("Output: " + ourObj.spiralOrder(matrix));
 	}
 }
