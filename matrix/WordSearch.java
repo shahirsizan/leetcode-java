@@ -1,4 +1,7 @@
+// CPS academy DSA sheet (Matrix)
 // https://leetcode.com/problems/word-search/description/?envType=problem-list-v2&envId=backtracking
+
+package matrix;
 
 public class WordSearch {
 	public boolean exist(char[][] givenBoard, String targetWord) {
@@ -10,7 +13,7 @@ public class WordSearch {
 			for (int currCol = 0; currCol < cols; currCol++) {
 				// traverse all cells of the matrix, upon finding the first match, start DFS
 				if (givenBoard[currRow][currCol] == targetWord.charAt(0)) {
-					result = wordSearchHelper(givenBoard, targetWord, currRow, currCol, 0);
+					result = wordSearchHelper(givenBoard, currRow, currCol, targetWord, 0);
 					if (result) {
 						return result;
 					}
@@ -20,27 +23,31 @@ public class WordSearch {
 		return result;
 	}
 	
-	private boolean wordSearchHelper(char[][] givenBoard, String targetWord, int currRow, int currCol, int currStartIdx) {
-		// base case: `currStartIdx` equals to target length
+	// wordSearchHelper() method signature:
+	// wordSearchHelper(matrix, currRow, currCol, target string, current index of string)
+	
+	private boolean wordSearchHelper(char[][] givenBoard, int currRow, int currCol, String targetWord, int currStartIdx) {
+		// base case 1: `currStartIdx` equals to target length, meaning target word achieved
 		if (currStartIdx == targetWord.length()) {
 			return true;
 		}
 		
-		// check current character match AND boundaries
+		// base case 2: current character doesn't match OR out of boundary
 		if (currRow < 0 || currRow >= givenBoard.length ||
 				currCol < 0 || currCol >= givenBoard[0].length ||
 				givenBoard[currRow][currCol] != targetWord.charAt(currStartIdx)) {
 			return false;
 		}
 		
-		// current character matches, so mark it as `visited` so that re-calculation won't happen in future
-		// and then explore all 4 adjacent cells (options)
+		// current character matches,
+		// mark it as `visited`/`#` so that re-calculation won't happen in future
+		// and explore all 4 adjacent cells (options)
 		char temp = givenBoard[currRow][currCol];
 		givenBoard[currRow][currCol] = '#';
-		boolean isFound = wordSearchHelper(givenBoard, targetWord, currRow, currCol + 1, currStartIdx + 1) ||
-				wordSearchHelper(givenBoard, targetWord, currRow, currCol - 1, currStartIdx + 1) ||
-				wordSearchHelper(givenBoard, targetWord, currRow + 1, currCol, currStartIdx + 1) ||
-				wordSearchHelper(givenBoard, targetWord, currRow - 1, currCol, currStartIdx + 1);
+		boolean isFound = wordSearchHelper(givenBoard, currRow, currCol + 1, targetWord, currStartIdx + 1) ||
+				wordSearchHelper(givenBoard, currRow, currCol - 1, targetWord, currStartIdx + 1) ||
+				wordSearchHelper(givenBoard, currRow + 1, currCol, targetWord, currStartIdx + 1) ||
+				wordSearchHelper(givenBoard, currRow - 1, currCol, targetWord, currStartIdx + 1);
 		
 		// backtrack: restore original
 		givenBoard[currRow][currCol] = temp;
