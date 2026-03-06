@@ -1,6 +1,8 @@
-package linkedList;// https://leetcode.com/problems/merge-k-sorted-lists/description/
+// CPS academy DSA sheet (Linked Lists, Heaps & Priority Queues)
+// https://leetcode.com/problems/merge-k-sorted-lists/description/
 
-import java.util.Comparator;
+package linkedList;
+
 import java.util.PriorityQueue;
 
 public class MergeKSortedLinkedLists {
@@ -32,33 +34,18 @@ public class MergeKSortedLinkedLists {
 			return null;
 		}
 		
-		// create a `min-Heap` which will contain `ListNode` types.
-		// their priority will be determined by comparing their respective `val` fields.
-		// nicher priority queue will also work. Er porer priority queue ami manually likhsi
-//		PriorityQueue<ListNode> minHeap = new PriorityQueue<>(
-//				new Comparator<ListNode>() {
-//					@Override
-//					public int compare(ListNode o1, ListNode o2) {
-//						return 0;
-//					}
-//				}
-//		);
-		PriorityQueue<ListNode> minHeap = new PriorityQueue<>(
-				new Comparator<ListNode>() {
-					@Override
-					public int compare(ListNode o1, ListNode o2) {
-						return o1.val - o2.val;
-					}
-				}
-		);
+		PriorityQueue<ListNode> minHeap = new PriorityQueue<>((ListNode a, ListNode b) -> {
+			return a.val - b.val;
+		});
 		
-		// insert left-most node (current head) of every non-empty list into the min-heap
+		// insert first node of all non-empty lists into `min-heap`
 		for (ListNode currListHead : givenHeadsList) {
 			if (currListHead != null) {
-				minHeap.add(currListHead);
+				minHeap.offer(currListHead);
 			}
 		}
 		
+		// time to insert remaining nodes
 		ListNode mergedListDummyHead = new ListNode(0);
 		ListNode currentNode = mergedListDummyHead;
 		while (!minHeap.isEmpty()) {
@@ -68,7 +55,7 @@ public class MergeKSortedLinkedLists {
 			currentNode.next = minNode;
 			currentNode = currentNode.next;
 			
-			// add the `next node` of the currently processed node into heap (if any)
+			// add next node of already processed node into heap
 			if (minNode.next != null) {
 				minHeap.add(minNode.next);
 			}
