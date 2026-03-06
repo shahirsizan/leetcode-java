@@ -3,6 +3,16 @@
 
 import java.util.PriorityQueue;
 
+/**
+ * 🥎 Complexity Analysis:
+ * We could have sorted the array in O(nlogn), but a Heap allows to find answer in O(nlogk)
+ * 🥎 Time Complexity: O(nlogk)
+ * We iterate through all n elements.
+ * Each `add` or `poll` operation on heap of size k takes O(logk).
+ * 🥎 Space Complexity: O(k)
+ * PriorityQueue of size `k`.
+ */
+
 public class KthLargest {
 	public int findKthLargest(int[] nums, int k) {
 		// PriorityQueue is a min-heap by default
