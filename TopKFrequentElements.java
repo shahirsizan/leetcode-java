@@ -1,4 +1,4 @@
-// CPS academy DSA sheet (Arrays)
+// CPS academy DSA sheet (Arrays, Heaps & Priority Queues)
 // https://leetcode.com/problems/top-k-frequent-elements/description/
 
 import java.util.*;
@@ -18,12 +18,14 @@ public class TopKFrequentElements {
 			}
 		}
 		
-		// `min heap` will contain least counted element in its head.
-		// So during traversal of the hashmap, all the elements with `less count` will get into the head and polled out.
-		// the last `k` elements that reside in the heap are the `k` largest elements
+		// if min-heap size exceeds `k`, remove top (smallest frequency)
+		// at the end, we'll have `k` elements which have the `largest` frequencies among all.
+		// the `top` one is the smallest among them
 		PriorityQueue<Map.Entry<Integer, Integer>> ourMinHeap = new PriorityQueue<>(
 				(a, b) -> a.getValue() - b.getValue()
 		);
+		// 🥎 More explanation on Functional interface
+		// 🥎 https://share.google/aimode/F5cWpTyrHrVBdGTCJ
 		
 		for (Map.Entry<Integer, Integer> entry : ourHashMap.entrySet()) {
 			ourMinHeap.add(entry);
