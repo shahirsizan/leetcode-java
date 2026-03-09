@@ -1,3 +1,8 @@
+// CPS academy DSA sheet (Recursion and Backtracking)
+// https://leetcode.com/problems/subsets/description/
+
+package RecursionAndBacktracking;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -13,13 +18,13 @@ public class SubsetsBacktracking {
 		this.currentSubset = new ArrayList<>();
 		
 		// start from index `0`
-		backtrack(0, currentSubset);
+		backtrack(0, currentSubset, nums);
 		
 		return result;
 	}
 	
 	// ✅backtrack✅
-	private void backtrack(int currStartIdx, List<Integer> currentSubset) {
+	private void backtrack(int currStartIdx, List<Integer> currentSubset, int[] nums) {
 		
 		// base case:
 		// because a valid subset can be of any length, so as soon as a `currentSubset` is formed,
@@ -31,7 +36,7 @@ public class SubsetsBacktracking {
 			// include option `nums[i]` in current position
 			currentSubset.add(nums[i]);
 			// Now proceed to next position to test `nums[i+1]`
-			backtrack(i + 1, currentSubset);
+			backtrack(i + 1, currentSubset, nums);
 			// next position was a base case. So came back to this position, remove the option `nums[i]`.
 			currentSubset.removeLast();
 			// Get a new option `nums[something]` for current position in next iteration

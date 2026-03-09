@@ -1,3 +1,8 @@
+// CPS academy DSA sheet (Recursion and Backtracking)
+// https://leetcode.com/problems/subsets-ii/description/
+
+package RecursionAndBacktracking;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -12,19 +17,17 @@ public class SubsetsBacktracking2 {
 		this.result = new ArrayList<>();
 		this.currentSubset = new ArrayList<>();
 		
-		// must sort: groups duplicates because Java's Array.contains()
-		// treats (1,4,4) and (4,1,4) differently. But they are same in our case
-		// so sorting will keep all the duplicates together
+		// Sort the array. Put all the duplicates together
 		Arrays.sort(nums);
 		
 		// start from index `0`
-		backtrack(0, currentSubset);
+		backtrack(nums, 0, currentSubset);
 		
 		return result;
 	}
 	
 	// ✅backtrack✅
-	private void backtrack(int currStartIdx, List<Integer> currentSubset) {
+	private void backtrack(int[] nums, int currStartIdx, List<Integer> currentSubset) {
 		
 		// base case:
 		// a valid subset can be of any length, so as soon as a `currentSubset` is formed,
@@ -32,7 +35,7 @@ public class SubsetsBacktracking2 {
 		result.add(new ArrayList<>(currentSubset));
 		
 		
-		// now explore possibilities: iterate through `nums` starting from 'currStartIdx' index
+		// explore possibilities: for current stack frame, iteration starts from 'currStartIdx'
 		for (int i = currStartIdx; i < nums.length; i++) {
 			// skip duplicates:
 			// if the current char is the same as the previous char in this loop,
@@ -40,10 +43,13 @@ public class SubsetsBacktracking2 {
 			if (i > currStartIdx && nums[i] == nums[i - 1]) {
 				continue;
 			}
+			
 			// include option `nums[i]` in current position
 			currentSubset.add(nums[i]);
+			
 			// Now proceed to next position to test `nums[i+1]`
-			backtrack(i + 1, currentSubset);
+			backtrack(nums, i + 1, currentSubset);
+			
 			// next position was a base case. So came back to this position, remove the option `nums[i]`.
 			currentSubset.removeLast();
 			// Get a new option `nums[something]` for current position in next iteration
