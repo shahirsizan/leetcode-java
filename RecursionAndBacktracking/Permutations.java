@@ -1,3 +1,8 @@
+// CPS academy DSA sheet (Recursion and Backtracking)
+// https://leetcode.com/problems/permutations/description/
+
+package RecursionAndBacktracking;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,17 +50,17 @@ public class Permutations {
 	
 	// ✅ main() ✅
 	public static void main(String[] args) {
-		PermutationsII myObj = new PermutationsII();
+		Permutations myObj = new Permutations();
 		
 		int[] nums1 = {1, 2, 3};
-		List<List<Integer>> result1 = myObj.permuteUnique(nums1);
+		List<List<Integer>> result1 = myObj.permute(nums1);
 		System.out.println("Input: [1, 2, 3]");
 		System.out.println("Output: " + result1);
 		
 		System.out.println("\n");
 		
 		int[] nums2 = {0, 1};
-		List<List<Integer>> result2 = myObj.permuteUnique(nums2);
+		List<List<Integer>> result2 = myObj.permute(nums2);
 		System.out.println("Input: [0, 1]");
 		System.out.println("Output: " + result2);
 	}
