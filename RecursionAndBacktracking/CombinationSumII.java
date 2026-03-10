@@ -1,4 +1,7 @@
+// CPS academy DSA sheet (Recursion and Backtracking)
 // https://leetcode.com/problems/combination-sum-ii/description/
+
+package RecursionAndBacktracking;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,19 +26,15 @@ public class CombinationSumII {
 			return;
 		}
 		
-		// Another base case: addition of the last element exceeds `target`. We gotta backtrack.
-		if (remaining < 0) {
-			return;
-		}
-		
 		// No base case, go on.
+		// [1, 1, 2, 5, 6, 7, 10], target = 8
 		// example {1,2,2,2,5}, target = 5
 		
 		for (int i = startIndexOfCurrentRecursion; i < givenNums.length; i++) {
-			// this is one of the `gotcha`
-			// we'll skip `equal` elements in succussive `iterations` in same `recursion stack frame` because that will generate duplicate combination
-			// (order won't matter, but char frequency will be same, that's why)
-			// just draw recursion tree and you'll understand
+			// This is one of the `gotcha`!
+			// We skip same options in subsequent loop iterations in the same `recursion stack frame`.
+			// Because that will generate duplicate combinations. Same options but in different recursion frame is OK.
+			// just draw recursion tree and you'll understand. Easy.
 			if (i > startIndexOfCurrentRecursion && givenNums[i] == givenNums[i - 1]) {
 				continue;
 			}
