@@ -1,4 +1,7 @@
+// CPS academy DSA sheet (Recursion and Backtracking)
 // https://leetcode.com/problems/permutations-ii/description/
+
+package RecursionAndBacktracking;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -34,17 +37,15 @@ public class PermutationsII {
 				continue;
 			}
 			
-			// if current option is same as previous one AND previous one is `not visited`
-			// which means previous one was previously added and then after backtrack, removed from `visitedBooleanList`,
-			// so technically we are in the `next iteration` of the `same recursion frame` in the stack
-			// and we have to skip current option.
+			// If `current` option is same as `previous` option AND `previous` option is `not visited`,
+			// means `previous` option is completely explored and after backtrack, removed from `visitedBooleanList`,
+			// So exploring the current option which is similar to the previous, will render the same permutations.
+			// So we have to skip current option.
 			if (i > 0 && givenNumsList[i] == givenNumsList[i - 1] && visitedBooleanList[i - 1] == false) {
 				continue;
 			}
-			// if previous one is `visited`,
-			// which means we are in the `next recursion frame` where the previous frame has the `previous same element` which is allowed.
-			// We can have {1,1,2}, {2,2,3} etc
-			
+			// if previous option, which is similar to current option, is `visited`,
+			// means we are at a subsequent `recursion frame` originated from that previous option, which is allowed.
 			
 			// add current option
 			currentList.add(givenNumsList[i]);
