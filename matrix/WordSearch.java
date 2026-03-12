@@ -1,4 +1,4 @@
-// CPS academy DSA sheet (Matrix)
+// CPS academy DSA sheet (Matrix, Recursion and Backtracking)
 // https://leetcode.com/problems/word-search/description/?envType=problem-list-v2&envId=backtracking
 
 package matrix;
