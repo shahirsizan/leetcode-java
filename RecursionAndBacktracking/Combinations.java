@@ -6,6 +6,13 @@ package RecursionAndBacktracking;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Problem	        Branching Logic	                Complexity (Simplified)
+ * Permutations	    n×(n−1)×(n−2)...	            O(n!)
+ * Combinations	    Only move forward (Increasing)	O((nCk)) [choose k items from n total items]
+ * Subsets	For     each element: "Yes" or "No"	    O(2n)
+ */
+
 public class Combinations {
 	public List<List<Integer>> combine(int n, int k) {
 		List<List<Integer>> resultList = new ArrayList<>();
