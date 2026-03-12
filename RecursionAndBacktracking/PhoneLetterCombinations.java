@@ -1,4 +1,7 @@
+// CPS academy DSA sheet (Recursion and Backtracking)
 // https://leetcode.com/problems/letter-combinations-of-a-phone-number/description/
+
+package RecursionAndBacktracking;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -6,10 +9,16 @@ import java.util.List;
 import java.util.Map;
 
 public class PhoneLetterCombinations {
+	
+	/**
+	 * TC: O(4^n * n)
+	 * SC: O(n)
+	 * https://share.google/aimode/TRpXFNpcCxsn5Vpho
+	 */
+	
 	private final Map<String, String> keypadMapping = new HashMap<>();
 	
-	// Common way to initialize a private map that belongs to a class. Keeps the logic separate from the class methods. [chatgpt]
-	{
+	public PhoneLetterCombinations() {
 		keypadMapping.put("0", "");
 		keypadMapping.put("1", "");
 		keypadMapping.put("2", "abc");
@@ -24,28 +33,30 @@ public class PhoneLetterCombinations {
 	
 	public List<String> letterCombinations(String givenDigits) {
 		List<String> resultList = new ArrayList<>();
+		
 		StringBuilder currentString = new StringBuilder();
-		backtrack(0, currentString, givenDigits, resultList);
+		backtrack(givenDigits, 0, currentString, resultList);
+		
 		return resultList;
 	}
 	
-	private void backtrack(int currentIndex, StringBuilder currentString, String givenDigits, List<String> resultList) {
-		// base case: `currentString.length == givenDigits.length()`,
-		// we found a valid string, append to `resultList`
+	private void backtrack(String givenDigits, int currentStartIndex, StringBuilder currentString, List<String> resultList) {
+		// Base case: valid string found, append to result
 		if (currentString.length() == givenDigits.length()) {
 			resultList.add(currentString.toString());
 			return;
 		}
 		
-		// get the available options (letters) for current position
-		String lettersOfCurrentButton = keypadMapping.get(givenDigits.charAt(currentIndex) + ""); // `Char -> String` typecasting
+		// get the available options (characters) of current position
+		String lettersOfCurrentButton = keypadMapping.get(givenDigits.charAt(currentStartIndex) + ""); // `Char -> String` typecasting
+		char[] charsOfCurrentButton = lettersOfCurrentButton.toCharArray();
 		
-		for (char c : lettersOfCurrentButton.toCharArray()) {
-			// add current option (letter)
-			currentString.append(c);
-			// recursive call to backtrack()
-			backtrack(currentIndex + 1, currentString, givenDigits, resultList);
-			// remove current option (letter), we'll go for next option
+		for (char ch : charsOfCurrentButton) {
+			// Add current option
+			currentString.append(ch);
+			// Explore current option
+			backtrack(givenDigits, currentStartIndex + 1, currentString, resultList);
+			// Backtrack and remove current option. We'll go for next option
 			currentString.deleteCharAt(currentString.length() - 1);
 		}
 	}
