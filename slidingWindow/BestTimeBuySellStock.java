@@ -1,4 +1,4 @@
-// CPS academy sheet (Arrays & Matrix)
+package slidingWindow;// CPS academy sheet (Arrays & Matrix, Sliding Window)
 // https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/
 
 import java.util.Arrays;
