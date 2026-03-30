@@ -1,4 +1,7 @@
-package linkedList;// https://leetcode.com/problems/merge-two-sorted-lists/
+// https://leetcode.com/problems/merge-two-sorted-lists/
+// `Kunal Kushwaha` youtube LL playlist
+
+package linkedList;
 
 public class MergeTwoSortedLists {
 	

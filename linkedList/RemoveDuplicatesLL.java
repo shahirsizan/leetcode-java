@@ -1,4 +1,5 @@
 // https://leetcode.com/problems/remove-duplicates-from-sorted-list/description/
+// `Kunal Kushwaha` youtube LL playlist
 
 package linkedList;
 
@@ -14,6 +15,7 @@ public class RemoveDuplicatesLL {
 	}
 	
 	public ListNode deleteDuplicates(ListNode head) {
+		// if no node or only one node
 		if (head == null || head.next == null) {
 			return head;
 		}
