@@ -1,3 +1,6 @@
+// https://leetcode.com/problems/trapping-rain-water/
+// // CPS academy sheet (Arrays, Two Pointers)
+
 import java.util.Arrays;
 
 public class TrappingRainWater {
