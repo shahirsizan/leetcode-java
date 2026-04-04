@@ -1,4 +1,5 @@
 // https://leetcode.com/problems/middle-of-the-linked-list/description/
+// Kunal Kushwaha (LL)
 
 package linkedList;
 

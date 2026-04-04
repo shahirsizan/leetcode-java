@@ -13,15 +13,14 @@ public class BestTimeBuySellStock {
 		
 		for (int i = 1; i < prices.length; i++) {
 			int currentPrice = prices[i];
-			int currentProfit = currentPrice - buyingPrice;
 			
 			if (currentPrice < buyingPrice) {
 				buyingPrice = currentPrice;
+			} else if (currentPrice > buyingPrice) {
+				int currentProfit = currentPrice - buyingPrice;
+				maxProfit = Math.max(maxProfit, currentProfit);
 			}
 			
-			if (currentProfit > maxProfit) {
-				maxProfit = currentProfit;
-			}
 		}
 		
 		return maxProfit;

@@ -1,4 +1,7 @@
-package linkedList;// https://leetcode.com/problems/reverse-linked-list/description/
+// https://leetcode.com/problems/reverse-linked-list/description/
+// CPS academy sheet (LL), Kunal Kushwaha (LL)
+
+package linkedList;
 
 public class ReverseLinkedList {
 	
@@ -16,14 +19,15 @@ public class ReverseLinkedList {
 		}
 	}
 	
+	// 🥎 reverseList() 🥎
 	public ListNode reverseList(ListNode head) {
-//		only one node
+		// No node or only one node
 		if (head == null || head.next == null) {
 			return head;
 		}
-//		more than one node
-//		Have to utilize three separate pointers.
-//		Nothing to understand. Just draw diagrams and it'll be easier to understand.
+		
+		// Have to utilize three separate pointers.
+		// Nothing to understand. Just draw diagrams and it'll be easier to understand.
 		ListNode prev = null;
 		ListNode curr = head;
 		ListNode next = head.next;
@@ -38,24 +42,18 @@ public class ReverseLinkedList {
 		return curr;
 	}
 	
-	// --- Main ---
-	
+	// 🥎 main() 🥎
 	public static void main(String[] args) {
-		ReverseLinkedList solver = new ReverseLinkedList();
+		ReverseLinkedList myObj = new ReverseLinkedList();
 		
-		// Input: 1 -> 2 -> 3 -> 4 -> 5
 		ListNode head = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, new ListNode(5)))));
-		
-		System.out.print("Original List: ");
-		printList(head);
-		
-		ListNode reversedHead = solver.reverseList(head);
-		
-		System.out.print("Reversed List: ");
-		printList(reversedHead); // Expected: 5 -> 4 -> 3 -> 2 -> 1
+		System.out.println("Before reverse: 1 -> 2 -> 3 -> 4 -> 5");
+		ListNode reversedHead = myObj.reverseList(head);
+		System.out.print("After reverse: ");
+		printList(reversedHead);
 	}
 	
-	// Helper function to print the list
+	// 🥎 printList() 🥎
 	private static void printList(ListNode head) {
 		ListNode current = head;
 		while (current != null) {

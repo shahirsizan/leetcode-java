@@ -1,7 +1,14 @@
 // https://leetcode.com/problems/palindrome-linked-list/description/
+// CPS academy sheet (LL), Kunal Kushwaha (LL)
 
 package linkedList;
 
+/**
+ * This approach is destructive because we are modifying the original LL.
+ * For non-destructive approach, use Stack.
+ * Solved that way in `PalindromeLinkedListUsingStack` class
+ *
+ */
 
 public class PalindromeLinkedList {
 	
@@ -28,7 +35,7 @@ public class PalindromeLinkedList {
 			fastPointer = fastPointer.next.next;
 		}
 		
-		// slowPointer now pointing at the node `immediately` before the middle of list. Reverse the second half.
+		// `slowPointer` now pointing at the node `immediately` before the middle of list. Reverse the second half.
 		ListNode secondHalfHead = reverse(slowPointer.next);
 		
 		// at this point, `secondHalfHead` acting as head of the reversed second half list
@@ -45,22 +52,21 @@ public class PalindromeLinkedList {
 			secondHalfIterator = secondHalfIterator.next;
 		}
 		
-		// cleanup: reverse the second half back to original
-		slowPointer.next = reverse(secondHalfHead);
-		
 		return result;
 	}
 	
 	private ListNode reverse(ListNode head) {
 		ListNode prev = null;
-		while (head != null) {
-			ListNode next = head.next;
-			head.next = prev;
-			prev = head;
-			head = next;
+		ListNode curr = head;
+		ListNode next = head.next;
+		while (curr.next != null) {
+			curr.next = prev;
+			prev = curr;
+			curr = next;
+			next = next.next;
 		}
-		// prev is now the head of the reversed second half list
-		return prev;
+		curr.next = prev;
+		return curr;
 	}
 	
 	// ✅ printList() ✅
@@ -75,20 +81,13 @@ public class PalindromeLinkedList {
 	public static void main(String[] args) {
 		PalindromeLinkedList myObj = new PalindromeLinkedList();
 		
-		// 1 -> 2 -> 2 -> 1
 		ListNode head = new ListNode(1);
 		head.next = new ListNode(2);
 		head.next.next = new ListNode(2);
 		head.next.next.next = new ListNode(1);
 		
-		System.out.print("Original: ");
-		myObj.printList(head);
-		System.out.println();
-		
+		System.out.println("Original: 1 -> 2 -> 2 -> 1");
 		boolean result = myObj.isPalindrome(head);
-		
 		System.out.println("Is Palindrome? : " + result);
-		System.out.print("After restoration: ");
-		myObj.printList(head);
 	}
 }
