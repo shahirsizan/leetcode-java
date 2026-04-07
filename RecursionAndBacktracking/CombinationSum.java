@@ -30,6 +30,11 @@ public class CombinationSum {
 		
 		int i = startIndexOfCurrentRecursion;
 		while (i < givenNums.length) {
+			
+			// Note: All elements are distinct.
+			// So no need to check if givenNums[i] == givenNums[i-1]
+			// Only check if `remaining` obeys the condition
+			
 			// Pruning: If `givenNums[i]` greater than the `remainder`,
 			// then all the subsequent numbers are also greater than the remainder.
 			// So no need to iterate or do recursion farther. Go back to previous stack frame.
